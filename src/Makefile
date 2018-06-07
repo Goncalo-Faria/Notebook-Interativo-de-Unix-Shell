@@ -1,4 +1,4 @@
-IDIR=include
+IDIR=../include
 ODIR=obj
 LDIR=lib
 OLDIR=$(ODIR)/lib
