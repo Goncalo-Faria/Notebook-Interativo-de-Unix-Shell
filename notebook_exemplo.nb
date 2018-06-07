@@ -1,0 +1,16 @@
+Ficheiro de teste:
+$ ps | sort | head -4
+Procecamento em paralelo:
+$ ls & ls & ls & ls
+Uso de pipe:
+$2| cat | cat | cat | cat | cat | wc -l
+Comando possivelmente complicado:
+$ ls -l | head -1 > gg.txt & aa || ps ; ls & head -1 < gg.txt
+Disjunção:
+$ -l || ls
+Redirecionamento de descritores:
+$| cat 4> err.txt ; wc       -l
+Modo append:
+$ ps >> err.txt
+Conjunção e espaçamentos não importam:
+$             ls     &&  ps
