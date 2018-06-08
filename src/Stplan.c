@@ -3,7 +3,6 @@
 #include "readb.h"    /* mkBuffer unmkBuffer readln */
 #include "sshell.h"   /* s_open s_sript s_close s_echo*/
 #include <sys/wait.h> /* wait*/
-#include <stdio.h>    /* perror */
 #include <ctype.h>    /* isdigit */
 #include "GArray.h"   /* mkGArray unmkGArray getG setG lengthG */
 
@@ -112,7 +111,7 @@ static s_pipe reRoute(int indx, Structure fileStr, int num, char *cmd)
     if (lengthSt(fileStr) < num + 1)
     {
         /* Tentar fazer $| sem usar comando anteriormente */
-        perror("erro -> | Routing  \n");
+        errorMessage("erro -> | Routing  \n");
         _exit(-1);
     }
     //printf(" :::> %d <:::\n", num);
@@ -251,7 +250,7 @@ void deployStructure(Structure a, int file)
             }
         }
         if (erro == -1)
-            perror("Escrita no ficheiro sem sucesso\n");
+            errorMessage("Escrita no ficheiro sem sucesso\n");
 
         close(file);
         _exit(0);
@@ -272,7 +271,7 @@ Structure deserializeStructure(int fd, int flag)
 
     if (fd == -1)
     {
-        perror("Algo de errado com o ficheiro de input\n ");
+        errorMessage("Algo de errado com o ficheiro de input\n ");
         _exit(-1);
     }
 

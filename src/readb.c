@@ -48,7 +48,6 @@ Buffer_t mkBuffer(int filedes, size_t nbyte)
 
     if (filedes == -1)
     {
-        //perror(" the file didn't work well. \n");
         return NULL;
     }
 

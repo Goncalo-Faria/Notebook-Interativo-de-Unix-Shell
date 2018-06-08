@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     {
         signal(SIGINT, safe_quit);
         pid = getpid();
-        mkfifo("ffadmin.session", 0660);
+        mkfifo( ADMIN_CALLS_PATH , 0660);
 
         if ((tpid = fork()) == -1)
         {
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         else if (!tpid)
         {
             cur = buffer;
-            rfl = open("ffadmin.session", O_RDONLY);
+            rfl = open(ADMIN_CALLS_PATH, O_RDONLY);
 
             read(rfl, cur, 1); /*Entra em deadlock até que algúem o abra*/
             
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         {
             errorMessage("Erro no ficheiro proporcionado pelo utilizador \n");
             kill(tpid, SIGKILL);
-            unlink("ffadmin.session");
+            unlink(ADMIN_CALLS_PATH);
             return -1;
         }
 
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 
         kill(tpid, SIGKILL);
 
-        unlink("ffadmin.session");
+        unlink(ADMIN_CALLS_PATH);
     }else{
         errorMessage(" Nao indicou o nome de nenhum ficheiro \n");
     }
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 static void safe_quit(int x)
 {
     char msg[400] = "\nPrograma abortou com sucesso.\nAs alterações feitas no notebook foram revertidas.\n\n";
-    if (!unlink("ffadmin.session"))
+    if (!unlink(ADMIN_CALLS_PATH))
     {
         write(1, msg, strlen(msg));
     }

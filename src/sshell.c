@@ -1,8 +1,7 @@
 #include "sshell.h" /* header file */
 #include "common.h"
-#include "mysys.h"  /* mysystem */
-#include "readb.h"  /* mkBuffer unmkBuffer readln*/
-#include <stdio.h>  /* perror */
+#include "mysys.h" /* mysystem */
+#include "readb.h" /* mkBuffer unmkBuffer readln*/
 
 /*-- Módulo de tipo abstrato de dados ----------------------------------------------------------*/
 
@@ -99,7 +98,7 @@ s_pipe s_echo(char *str)
         else if (!r)
         {
             if (write(pd[1], str, strlen(str)) == -1)
-                perror(" Erro ao escrever no pipe \n");
+                errorMessage(" Erro ao escrever no pipe \n");
             close(pd[1]);
             _exit(1);
         }
@@ -129,7 +128,7 @@ char *s_script(s_pipe in)
             huge[i++] = send; /* adiciona a uma lista */
             sum += n;         /*conta os todos os bytes lidos */
             if (i == 20000)
-                perror("Capacity execeded _ ::script:: _\n");
+                errorMessage("Capacity execeded _ ::script:: _\n");
         }
         //printf(" CataList whent fine \n");
         huge[i] = NULL;
@@ -186,7 +185,7 @@ s_pipe s_fork(s_pipe fin, int fileds)
                 free(text);
             }
             if (erro == -1)
-                perror("Erro ao escrever para ficheiro\n");
+                errorMessage("Erro ao escrever para ficheiro\n");
             unmkBuffer(stcm);
             close(pd[1]);
             _exit(1);

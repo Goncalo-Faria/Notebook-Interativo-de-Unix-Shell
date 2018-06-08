@@ -207,7 +207,7 @@ int evaluate(G cur, Syntax sy, EXCEPTION var)
 
     if (var == CATCH && flag == WARNING_CODE)
     {
-        fd = open("ffadmin.session", O_WRONLY);
+        fd = open(ADMIN_CALLS_PATH, O_WRONLY);
         //write(fd, "WACK\n", 5);
         close(fd);
     }
